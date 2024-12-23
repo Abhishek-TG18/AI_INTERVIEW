@@ -22,19 +22,18 @@ const {
   };
   
   const safetySettings = [
-    {
-      category: HarmCategory.HARM_CATEGORY_DEROGATORY,
-      threshold: HarmBlockThreshold.HARM_BLOCK_THRESHOLD_HIGH,
-    },
-    {
-      category: HarmCategory.HARM_CATEGORY_VIOLENT,
-      threshold: HarmBlockThreshold.HARM_BLOCK_THRESHOLD_MEDIUM,
-    },
+    { category: "HARM_CATEGORY_HATE_SPEECH", threshold: 3 },
+    { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: 3 },
+    { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: 3 },
+    { category: "HARM_CATEGORY_HARASSMENT", threshold: 3 },
+    { category: "HARM_CATEGORY_CIVIC_INTEGRITY", threshold: 3 },
   ];
+  
   
   // Initialize the chat session
   export const chatSession = model.startChat({
     generationConfig,
+    safetySettings,
  
   });
   
