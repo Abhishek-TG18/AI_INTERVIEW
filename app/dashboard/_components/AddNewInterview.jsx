@@ -57,7 +57,9 @@ function AddNewInterview() {
       const result = await chatSession.sendMessage(inputPrompt);
       // const data = result.response?.candidates[0]?.content?.parts[0]?.text;
       // console.log('Generated Interview Questions:', data);
-      const mockJsonResp=(result.response.text()).replace('```json','').replace('```','');
+      const mockJsonResp=(result.response.text())
+      .replace(/```json/g, '')  
+      .replace(/```/g, '').trim();
       // console.log(JSON.parse(mockJsonResp));
       // console.log( db.select().from(MockInterview).limit(10));
       setJsonResponse(mockJsonResp);

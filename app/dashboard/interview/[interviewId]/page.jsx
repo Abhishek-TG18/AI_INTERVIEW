@@ -7,10 +7,13 @@ import { eq } from 'drizzle-orm';
 import Webcam from 'react-webcam';
 import { Lightbulb, WebcamIcon } from 'lucide-react';
 import { Button } from '../../../../components/ui/button';
+import { Router } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 function Interview({ params }) {
   const [interviewDetails, setInterviewDetails] = useState(null);
   const [webcamp, setWebcamp] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const getInterviewDetails = async () => {
@@ -36,19 +39,21 @@ function Interview({ params }) {
   const handleWebcamToggle = () => {
     setWebcamp(true);
   };
+  const unwrappedParams = React.use(params);
+  const startInt = ()=> router.push('/dashboard/interview/'+unwrappedParams.interviewId+'/start');
 
   return (
     <div className="my-10 flex flex-col justify-center items-center">
-      <h1 className="font-bold text-2xl">Let's get Started</h1>
+      <h1 className="font-bold text-2xl">Let's Get Started</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div className="flex flex-col my-5 gap-5">
           {interviewDetails ? (
             <div className="flex flex-col my-5 gap-5 p-5 rounded-lg border">
               <h2 className="text-lg">
-                <strong>Job Role:</strong> {interviewDetails.jobPosition}
+                <strong>Job Role/Job Position:</strong> {interviewDetails.jobPosition}
               </h2>
               <h2 className="text-lg">
-                <strong>Job Description:</strong> {interviewDetails.jobDesc}
+                <strong>Job Description/Tech Stack:</strong> {interviewDetails.jobDesc}
               </h2>
               <h2 className="text-lg">
                 <strong>Years of Experience:</strong> {interviewDetails.jobExperience}
@@ -97,7 +102,7 @@ function Interview({ params }) {
         </div>
       </div>
      <div className='flex justify-end items-end'>
-         <Button>Start Interview</Button>
+         <Button onClick={startInt}>Start Interview</Button>
      </div>
     </div>
   );
