@@ -48,7 +48,7 @@ function QuestionSection({ mockinterviewquestion ,activeQuestion}) {
           // Make sure to return the element
           return mockinterviewquestion &&(
             <h2 key={index} className={`p-2 bg-secondary rounded-full text-xs md:text-sm text-center cursor-pointer 
-                ${activeQuestion ==index&& 'bg-blue-600 text-white'}
+                ${activeQuestion ==index&& 'bg-black   text-white'}
             `}>
               Question: {index + 1}
             </h2>

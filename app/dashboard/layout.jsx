@@ -1,6 +1,6 @@
 import React from 'react'
 import Headder from './_components/Header'
-import MockInterview from '../../utils/schema'
+import {MockInterview} from '../../utils/schema'
 import {Toaster} from '../../@/components/ui/sonner'
 
 

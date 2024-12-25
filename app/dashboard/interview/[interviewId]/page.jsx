@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../../utils/db';
-import MockInterview from '../../../../utils/schema';
+import {MockInterview} from '../../../../utils/schema';
 import { eq } from 'drizzle-orm';
 import Webcam from 'react-webcam';
 import { Lightbulb, WebcamIcon } from 'lucide-react';

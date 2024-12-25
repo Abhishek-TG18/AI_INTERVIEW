@@ -20,7 +20,7 @@ import { useUser } from '@clerk/nextjs';
 import moment from 'moment';
 
 import {db} from '../../../utils/db';
-import MockInterview from '../../../utils/schema'
+import {MockInterview} from '../../../utils/schema'
 import { useRouter } from 'next/navigation';
 
 
