@@ -11,7 +11,7 @@ import RecordAns from './_component/RecordAns'
 
 function StartInterview({ params }) {
   const [interviewDetails, setInterviewDetails] = useState(null);
-  const [mockinterviewquestion , setmockinterviewquestion]=useState();
+  const [mockinterviewquestion , setmockinterviewquestion]=useState('');
   const router = useRouter();
   const unwrappedParams = React.use(params);
   const [activeQuestion , setActiveQuestion] = useState(1);
@@ -26,16 +26,25 @@ function StartInterview({ params }) {
     .where(eq(MockInterview.mockId,unwrappedParams.interviewId))
     // console.log(result[0].jsonMockResp);
     const jsonMockResp=JSON.parse(result[0].jsonMockResp)
-    setmockinterviewquestion(jsonMockResp);
-    setInterviewDetails(result[0]);
-    // console.log(jsonMockResp);
+    // setmockinterviewquestion(jsonMockResp.interviewQuestions);
+    if (Array.isArray(jsonMockResp)) {
+      setmockinterviewquestion(jsonMockResp);
+      console.log(mockinterviewquestion);
+  } else if (typeof jsonMockResp === 'object' && jsonMockResp !== null) {
+    setmockinterviewquestion(jsonMockResp.interviewQuestions);
+    console.log(mockinterviewquestion);
+  }
+  
+ 
 
   }
-return (
+return mockinterviewquestion &&(
         <div>
+          {console.log(mockinterviewquestion)}
             <div className='grid grid-cols-1 md:grid-cols-2'>
                 <QuestionSection mockinterviewquestion={mockinterviewquestion}  activeQuestion={activeQuestion}/>
-                <RecordAns />
+                <RecordAns mockinterviewquestion={mockinterviewquestion} activeQuestion={activeQuestion} />
+                
 
             </div>
         </div>
