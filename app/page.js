@@ -9,7 +9,7 @@ export default function Home() {
 
 
    <div> hI</div>
-   <Button> Subcribe</Button>
+   <Button> Go to localhost:3000/dashboard</Button>
    </>
   );
 }

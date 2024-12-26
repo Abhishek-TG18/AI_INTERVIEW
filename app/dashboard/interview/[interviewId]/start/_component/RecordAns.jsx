@@ -14,6 +14,10 @@ import { useUser } from '@clerk/nextjs';
 import moment from 'moment';
 
 const RecordAns = ({ mockinterviewquestion, activeQuestion, interviewDetails }) => {
+  console.log(mockinterviewquestion);
+  console.log(mockinterviewquestion[activeQuestion].answer_example,)
+  
+  
   const { user } = useUser();
   const useSpeechToText = require('react-hook-speech-to-text').default;
 
@@ -69,13 +73,13 @@ const RecordAns = ({ mockinterviewquestion, activeQuestion, interviewDetails }) 
 
     const correctAnswer = Array.isArray(mockinterviewquestion.mockinterviewquestion)
       ? mockinterviewquestion.mockinterviewquestion[activeQuestion]?.answerExample || "No answer available"
-      : mockinterviewquestion[activeQuestion]?.answerExample;
+      : mockinterviewquestion[activeQuestion]?.answer_Example;
 
     const feedbackPrompt = `Question: ${questionText}, User Answer: ${userAnswerr}. Provide a rating for the user's answer and feedback (areas of improvement) in JSON format with fields 'rating' and 'feedback' in 3 to 5 lines.`;
 
     try {
       const result = await chatSession.sendMessage(feedbackPrompt);
-      const feedbackResponse = (await result.response.text())
+      const feedbackResponse = ( result.response.text())
         .replace(/```json/g, '')
         .replace(/```/g, '')
         .trim();
@@ -84,7 +88,7 @@ const RecordAns = ({ mockinterviewquestion, activeQuestion, interviewDetails }) 
       const dbResponse = await db.insert(UserAnswer).values({
         mockIdRef: interviewDetails?.mockId,
         question: questionText,
-        correctAns: correctAnswer,
+        correctAns: mockinterviewquestion[activeQuestion].answer_example,
         UserAns: userAnswerr,
         feedback: jsonFeedback?.feedback,
         rating: jsonFeedback?.rating,
